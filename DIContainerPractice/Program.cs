@@ -13,22 +13,25 @@ namespace DIContainerPractice
         {
             Console.WriteLine("Hello World!");
 
-            //Aの外でインスタンス化
-            var b = new B();
-            var c = new C();
-            var d = new D();
+            var container = new UnityContainer();
 
-            //Aのコンスタクタ経由でB、C、Dのインスタンスを渡す
-            var a = new A(b, c, d);
+            //型引数にはインターフェースとその具象クラスをペアで指定
+            //そのインターフェースの引数には、ペアとなる具象クラスのインスタンスを使う、
+            //という指定。
+            container.RegisterType<IB, B>();
+            container.RegisterType<IC, C>();
+            container.RegisterType<ID, D>();
+
+            //クラスB、C、Dのインスタンスを生成し、
+            //クラスAのコンストラクタに渡して、
+            //クラスAのインスタンスを生成
+            var a = container.Resolve<A>();
             a.Do();
 
-            //インターフェースを実装していさえすればOK
-            var bModoki = new BModoki();
-            var cModoki = new CModoki();
-            var dModoki = new DModoki();
-
-            var a2 = new A(bModoki, cModoki, dModoki);
-            a2.Do();
+            //クラスAのインスタンス生成は1行でOK
+            var aa = container.Resolve<A>();
+            var aaa = container.Resolve<A>();
+            var aaaa = container.Resolve<A>();
         }
     }
 
