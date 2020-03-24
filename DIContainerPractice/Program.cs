@@ -18,11 +18,11 @@ namespace DIContainerPractice
             //型引数にはインターフェースとその具象クラスをペアで指定
             //そのインターフェースの引数には、ペアとなる具象クラスのインスタンスを使う、
             //という指定。
-            container.RegisterType<IB, B>();
+            container.RegisterType<IB, BModoki>();//BModoki
             container.RegisterType<IC, C>();
             container.RegisterType<ID, D>();
 
-            //クラスB、C、Dのインスタンスを生成し、
+            //クラスBModoki、C、Dのインスタンスを生成し、
             //クラスAのコンストラクタに渡して、
             //クラスAのインスタンスを生成
             var a = container.Resolve<A>();
@@ -56,7 +56,7 @@ namespace DIContainerPractice
         private IC _c;
         private ID _d;
 
-        public A(IB b, IC c, ID d)
+        public A(IB b, IC c, ID d,string text)
         {
             this._b = b;
             this._c = c;
